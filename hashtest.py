@@ -1,15 +1,12 @@
 import hashlib
 
-
-def hash(username, password):
-    newpass = ''.join(str(ord(c)) for c in password)
-    m = hashlib.sha256()
-    m.update(b"(newpass)")
+def hash(password):
     
-    digest = m.hexdigest()
+    str = hashlib.sha256(password.encode('utf-8'))
+    text_hashed = str.hexdigest() 
 
-    return digest
+    return text_hashed
 
-x = hash("Liam", "Hello")
-
-print(x)
+if __name__ == '__main__' :
+    passdigest = hash("Dullea")
+    print(passdigest)
