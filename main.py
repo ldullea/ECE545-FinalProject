@@ -8,14 +8,18 @@
 # ---------------------------
 
 import numpy as np
+from hashtest import hash
 from Pyfhel import Pyfhel
-HE = Pyfhel() 
 
+# HOMOMORPHIC ENCRYPTION INSTANTIATION 
+
+HE = Pyfhel() 
+n = 13 # modulus degree variable 
 # BGV Kep Setup
 
 bgv_params = {
     'scheme': 'BGV',    # can also be 'bgv'
-    'n': 2**13,         # Polynomial modulus degree, the num. of slots per plaintext,
+    'n': 2**n,         # Polynomial modulus degree, the num. of slots per plaintext,
                         #  of elements to be encoded in a single ciphertext in a
                         #  2 by n/2 rectangular matrix (mind this shape for rotations!)
                         #  Typ. 2^D for D in [10, 16]
@@ -33,24 +37,60 @@ HE.rotateKeyGen()       # Rotate key generation --> Allows rotation/shifting
 HE.relinKeyGen()        # Relinearization key generation
 
 
-integer1 = np.array([127], dtype=np.int64)
-integer2 = np.array([-2], dtype=np.int64)
-ctxt1 = HE.encryptBGV(integer1) # Encryption makes use of the public key
-ctxt2 = HE.encryptBGV(integer2) # For BGV, encryptBGV function is used.
-print("\n3. BGV Encryption, ")
-print("    int ",integer1,'-> ctxt1 ', ctxt1)
-print("    int ",integer2,'-> ctxt2 ', ctxt2)
+# HASH LOGON INSTANTIATION
+Users = []
+check = True
 
 
-ctxtSum = ctxt1 + ctxt2 
-print("ctext sum:", ctxtSum)
+# USER SECURE LOGON USING HASH FUNCTIONS
+
+while check == True:
+    error = 0
+    username = ""
+    password = ""
+    print("\nEnter username and password (If new user enter \"NEW\")")
+    username = input("Enter Username (case sensitive): ")
+    if username == "NEW":
+        newusername = input("Input new username (case sensitive): ")
+        if newusername == "NEW":
+                print("Username cannot be 'NEW' please enter new username")
+                error = 1
+            # DOUBLE CHECK CORNER CASE FOR OVERWRITING USERNAMES
+        for user in Users:
+            if user[0] == newusername:
+                print("Error: duplicate username")
+                error = 1
+        if error == 1:
+            continue
+        newpassword = input("Enter new password (case sensitive): ")
+        newpassdig = hash(newpassword)
+        Users.append([newusername, newpassdig])
+        #print("\n")
+        #print(Users)
+    elif(username == "EXIT"):
+        exit()
+    else:
+        password = input("Enter Password (case sensitive): ")
+        #print(Users)
+        for user in Users:
+            print(user)
+            if user[0] == username and user[1] == hash(password):
+                #print("HERE")
+                check = False
+                continue
+            else:
+                print("Incorrect Username/Password please try again\n")
+                continue  
+print("SUCCESSFUL LOGON")
 
 
-ctxtSum = ctxtSum + 1
+# DEBUGGING AND TESTING 
 
-print("ctext sum:", ctxtSum)
 
-resSum = HE.decryptBGV(ctxtSum)
+#print(Users)
 
-print("     addition:       decrypt(ctxt1 + ctxt2) =  ", resSum)
+#test = hash("Dullea")
+
+#print(test)
+
 
