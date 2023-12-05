@@ -33,8 +33,8 @@ HE.rotateKeyGen()       # Rotate key generation --> Allows rotation/shifting
 HE.relinKeyGen()        # Relinearization key generation
 
 
-integer1 = np.array([127])
-integer2 = np.array([-2])
+integer1 = np.array([0])
+integer2 = np.array([0])
 ctxt1 = HE.encryptBGV(integer1) # Encryption makes use of the public key
 ctxt2 = HE.encryptBGV(integer2) # For BGV, encryptBGV function is used.
 print("\n3. BGV Encryption, ")
@@ -46,7 +46,7 @@ ctxtSum = ctxt1 + ctxt2
 print("ctext sum:", ctxtSum)
 
 
-votecount = 10000
+votecount = 516096 # one hunred mil
 print("Add", votecount, "to ciphertext")
 ctxtSum = ctxtSum + votecount
 
