@@ -82,6 +82,7 @@ while True:
             #print(newpassdig)
             Users.append([newusername, newpassdig])
             Voted[newusername] = 0
+            print("New user successfully added")
 
             #print("\n")
             #print(Users)
@@ -137,13 +138,13 @@ resSum1 = HE.decryptBGV(ctxtOption1)
 resSum2 = HE.decryptBGV(ctxtOption2)
 
 if resSum1[0] > resSum2[0]:
-    print("Option 1 Wins!", resSum1[0],">", resSum2[0])    
+    print("Option 1 Wins!", resSum1[0],"-", resSum2[0])    
 
 if resSum1[0] < resSum2[0]:
-    print("Option 2 Wins!", resSum1[0],"<", resSum2[0])    
+    print("Option 2 Wins!", resSum1[0],"-", resSum2[0])    
 
 if resSum1[0] == resSum2[0]:
-    print("its a tie!", resSum1[0],"=", resSum2[0])    
+    print("its a tie!", resSum1[0],"-", resSum2[0])    
 
 # DEBUGGING AND TESTING 
 
