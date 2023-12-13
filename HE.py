@@ -3,7 +3,16 @@
 #
 # Skeleton Code taken from Open Pyfhel Library found at: https://github.com/ibarrond/Pyfhel/tree/master
 #
-#
+# FILE FOR TESTING HOMOMORPHIC ENCRYPTION. NO ACTUAL IMPACT ON MAIN.PY
+
+
+
+
+
+
+
+
+
 # 1. Imports and instantiation
 # ---------------------------
 
