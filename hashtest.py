@@ -1,3 +1,14 @@
+# Liam Dullea and Eric Mains
+# ECE 545 UMass Amherst 
+#
+# Skeleton Code taken from Open Pyfhel Library found at: https://github.com/ibarrond/Pyfhel/tree/master
+
+
+# Hash function used in main.py
+
+
+
+
 import hashlib
 
 def hash(password):
